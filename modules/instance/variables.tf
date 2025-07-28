@@ -4,14 +4,14 @@ variable "naming_prefix" {
 }
 
 variable "public_key" {
-  description = "Contenido de la clave pública SSH"
+  description = "Clave pública SSH, solo se puede introducir un string de momento. Copiar el contenido de ~/.ssh/<key-name>.pub"
   type        = string
 }
 
 variable "ami" {
   description = "AMI de la instancia EC2"
   type        = string
-  default     = "ami-08a6efd148b1f7504"
+  default     = "ami-08a6efd148b1f7504" # Amazon Linux 2023 Kernel 6.1 64 bits
 }
 
 variable "instance_type" {

@@ -1,8 +1,8 @@
 locals {
-  vpc         = "${var.naming_prefix}-vpc"
-  igw         = "${var.naming_prefix}-igw"
-  subnet_base = "${var.naming_prefix}-subnet-public"
-  rt_public = "${var.naming_prefix}-rt-public"
+  vpc            = "${var.naming_prefix}-vpc"
+  igw            = "${var.naming_prefix}-igw"
+  subnet_base    = "${var.naming_prefix}-subnet-public"
+  rt_public      = "${var.naming_prefix}-rt-public"
   security_group = "${var.naming_prefix}-secgrp"
 }
 
@@ -10,7 +10,7 @@ locals {
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr_block
   tags = {
-    Name         = local.vpc
+    Name = local.vpc
   }
 }
 
@@ -22,7 +22,6 @@ resource "aws_subnet" "public_subnets" {
 
   tags = {
     Name = "${local.subnet_base}-${count.index + 1}"
-    #Name         = "public-subnet-${count.index + 1}_${var.availability_zones[count.index]}_${var.vpc_name}"
   }
 }
 
@@ -30,7 +29,7 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name         = local.igw
+    Name = local.igw
   }
 }
 
@@ -43,7 +42,7 @@ resource "aws_route_table" "public_routing_table" {
   }
 
   tags = {
-    Name         = local.rt_public
+    Name = local.rt_public
   }
 }
 
@@ -59,7 +58,7 @@ resource "aws_security_group" "main" {
   vpc_id      = aws_vpc.main.id
 
   tags = {
-    Name         = local.security_group
+    Name = local.security_group
   }
 }
 

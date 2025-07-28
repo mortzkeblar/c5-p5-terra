@@ -19,9 +19,6 @@ variable "region" {
   description = "Región de AWS"
 }
 
-#variable "vpc_name" {
-#  type    = string
-#}
 
 variable "public_subnet_cidrs" {
   type    = list(string)
@@ -34,7 +31,7 @@ variable "availability_zones" {
 }
 
 variable "my_public_ip" {
-  type    = string
+  type = string
 }
 
 variable "organization" {
@@ -42,10 +39,6 @@ variable "organization" {
   default = "Mikroways"
 }
 
-#variable "key_name" {
-#  type    = string
-#  default = "mcanaza-public-key"
-#}
 
 variable "public_key" {
   type    = string
@@ -62,7 +55,6 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-# outputs.tf (root)
 output "vpc_id" {
   value = module.network.vpc_id
 }
