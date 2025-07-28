@@ -1,12 +1,12 @@
-variable "vpc_name" {
+variable "naming_prefix" {
+  description = "Prefijo base para el nombramiento de recursos"
   type        = string
-  description = "Nombre de la VPC"
 }
 
-variable "organization" {
-  type        = string
-  description = "Nombre de la organización"
-}
+#variable "vpc_name" {
+#  type        = string
+#  description = "Nombre de la VPC"
+#}
 
 variable "vpc_cidr_block" {
   type        = string

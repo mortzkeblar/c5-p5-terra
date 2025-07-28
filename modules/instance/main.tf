@@ -1,3 +1,8 @@
+locals {
+  instance_name = "${var.naming_prefix}-ec2-1"
+}
+
+
 resource "aws_key_pair" "public_key" {
   public_key = var.public_key
   #public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHtsDTrBlj5M+jg+vqFoK6oHnmtLrbXWViBZOhWo4kex mortzkeb@gmail.com"
@@ -12,9 +17,9 @@ resource "aws_instance" "ec2_instance_1" {
   key_name = aws_key_pair.public_key.id
   associate_public_ip_address = true
   subnet_id = var.subnet_id
-  vpc_security_group_ids = var.security_group_id
+  vpc_security_group_ids = var.security_groups_id
+  
   tags = {
-    Name = "ec2-instance-1_${var.vpc_name}"
-    Organization = var.organization
+    Name = local.instance_name
   }
 }

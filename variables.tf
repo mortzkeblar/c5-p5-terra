@@ -1,6 +1,27 @@
-variable "vpc_name" {
-  type    = string
+
+variable "prefix" {
+  type        = string
+  description = "Abreviatura de la organización o prefijo general para nombres"
 }
+
+variable "project" {
+  type        = string
+  description = "Nombre del proyecto"
+}
+
+variable "environment" {
+  type        = string
+  description = "Ambiente de despliegue"
+}
+
+variable "region" {
+  type        = string
+  description = "Región de AWS"
+}
+
+#variable "vpc_name" {
+#  type    = string
+#}
 
 variable "public_subnet_cidrs" {
   type    = list(string)

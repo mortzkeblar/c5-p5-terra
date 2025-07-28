@@ -1,13 +1,7 @@
-variable "vpc_name" {
-  description = "Nombre de la VPC"
+variable "naming_prefix" {
+  description = "Prefijo base para el nombramiento de recursos"
   type        = string
 }
-
-variable "organization" {
-  type        = string
-  description = "Nombre de la organización"
-}
-
 
 variable "public_key" {
   description = "Contenido de la clave pública SSH"
@@ -31,8 +25,8 @@ variable "subnet_id" {
   type        = string
 }
 
-variable "security_group_id" {
-  description = "ID del security group"
+variable "security_groups_id" {
+  description = "ID de security groups"
   type        = list(string)
 }
 
