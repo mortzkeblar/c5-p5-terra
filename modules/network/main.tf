@@ -1,9 +1,16 @@
+locals {
+  vpc            = "${var.naming_prefix}-vpc"
+  igw            = "${var.naming_prefix}-igw"
+  subnet_base    = "${var.naming_prefix}-subnet-public"
+  rt_public      = "${var.naming_prefix}-rt-public"
+  security_group = "${var.naming_prefix}-secgrp"
+}
+
+
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr_block
-
   tags = {
-    Name         = var.vpc_name
-    Organization = var.organization
+    Name = local.vpc
   }
 }
 
@@ -14,8 +21,7 @@ resource "aws_subnet" "public_subnets" {
   availability_zone = var.availability_zones[count.index]
 
   tags = {
-    Name         = "public-subnet-${count.index + 1}_${var.availability_zones[count.index]}_${var.vpc_name}"
-    Organization = var.organization
+    Name = "${local.subnet_base}-${count.index + 1}"
   }
 }
 
@@ -23,8 +29,7 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name         = "igw_${var.vpc_name}"
-    Organization = var.organization
+    Name = local.igw
   }
 }
 
@@ -37,8 +42,7 @@ resource "aws_route_table" "public_routing_table" {
   }
 
   tags = {
-    Name         = "public-routing-table_${var.vpc_name}"
-    Organization = var.organization
+    Name = local.rt_public
   }
 }
 
@@ -49,13 +53,12 @@ resource "aws_route_table_association" "public_subnet_association" {
 }
 
 resource "aws_security_group" "main" {
-  name        = "secgrp_${var.vpc_name}"
+  name        = local.security_group
   description = "Security rules for EC2 instance"
   vpc_id      = aws_vpc.main.id
 
   tags = {
-    Name         = "secgrp_${var.vpc_name}"
-    Organization = var.organization
+    Name = local.security_group
   }
 }
 

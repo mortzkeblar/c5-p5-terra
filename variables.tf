@@ -1,6 +1,24 @@
-variable "vpc_name" {
-  type    = string
+
+variable "prefix" {
+  type        = string
+  description = "Abreviatura de la organización o prefijo general para nombres"
 }
+
+variable "project" {
+  type        = string
+  description = "Nombre del proyecto"
+}
+
+variable "environment" {
+  type        = string
+  description = "Ambiente de despliegue"
+}
+
+variable "region" {
+  type        = string
+  description = "Región de AWS"
+}
+
 
 variable "public_subnet_cidrs" {
   type    = list(string)
@@ -13,7 +31,7 @@ variable "availability_zones" {
 }
 
 variable "my_public_ip" {
-  type    = string
+  type = string
 }
 
 variable "organization" {
@@ -21,10 +39,6 @@ variable "organization" {
   default = "Mikroways"
 }
 
-#variable "key_name" {
-#  type    = string
-#  default = "mcanaza-public-key"
-#}
 
 variable "public_key" {
   type    = string
@@ -41,7 +55,6 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-# outputs.tf (root)
 output "vpc_id" {
   value = module.network.vpc_id
 }
